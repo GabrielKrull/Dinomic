@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
 
+// Frontend estático (HTML/CSS/JS puro + Phaser via import de node_modules).
+// O Vite atua apenas como dev server com proxy para a API Laravel.
 export default defineConfig({
-  plugins: [vue()],
   root: './',
   build: {
     outDir: '../dist',
@@ -15,10 +15,10 @@ export default defineConfig({
         target: 'http://localhost:8000',
         changeOrigin: true,
       },
-      '/socket.io': {
+      '/sanctum': {
         target: 'http://localhost:8000',
-        ws: true,
-      }
-    }
-  }
+        changeOrigin: true,
+      },
+    },
+  },
 })
